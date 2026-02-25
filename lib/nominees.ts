@@ -1,0 +1,195 @@
+import type { YearNominees } from './types'
+
+// Nominee lists per year - titles are used to search TMDB for full details
+// Add new years as they are announced
+export const NOMINEES_BY_YEAR: YearNominees[] = [
+  {
+    year: 2026,
+    ceremony: '98th Academy Awards',
+    nominees: [
+      { title: 'Sinners' },
+      { title: 'One Battle After Another' },
+      { title: 'Sentimental Value' },
+      { title: 'The Secret Agent' },
+      { title: 'Hamnet' },
+      { title: 'Frankenstein' },
+      { title: 'F1' },
+      { title: 'Bugonia' },
+      { title: 'Train Dreams' },
+      { title: 'Marty Supreme' },
+    ],
+  },
+  {
+    year: 2025,
+    ceremony: '97th Academy Awards',
+    nominees: [
+      { title: 'Anora' },
+      { title: 'The Brutalist' },
+      { title: 'A Complete Unknown' },
+      { title: 'Conclave' },
+      { title: 'Dune: Part Two' },
+      { title: 'Emilia Pérez' },
+      { title: 'I\'m Still Here' },
+      { title: 'Nickel Boys' },
+      { title: 'The Substance' },
+      { title: 'Wicked' },
+    ],
+  },
+  {
+    year: 2024,
+    ceremony: '96th Academy Awards',
+    nominees: [
+      { title: 'Oppenheimer' },
+      { title: 'American Fiction' },
+      { title: 'Anatomy of a Fall' },
+      { title: 'Barbie' },
+      { title: 'The Holdovers' },
+      { title: 'Killers of the Flower Moon' },
+      { title: 'Maestro' },
+      { title: 'Past Lives' },
+      { title: 'Poor Things' },
+      { title: 'The Zone of Interest' },
+    ],
+  },
+  {
+    year: 2023,
+    ceremony: '95th Academy Awards',
+    nominees: [
+      { title: 'Everything Everywhere All at Once' },
+      { title: 'All Quiet on the Western Front' },
+      { title: 'Avatar: The Way of Water' },
+      { title: 'The Banshees of Inisherin' },
+      { title: 'Elvis' },
+      { title: 'The Fabelmans' },
+      { title: 'Tár' },
+      { title: 'Top Gun: Maverick' },
+      { title: 'Triangle of Sadness' },
+      { title: 'Women Talking' },
+    ],
+  },
+  {
+    year: 2022,
+    ceremony: '94th Academy Awards',
+    nominees: [
+      { title: 'CODA' },
+      { title: 'Belfast' },
+      { title: 'Don\'t Look Up' },
+      { title: 'Drive My Car' },
+      { title: 'Dune' },
+      { title: 'King Richard' },
+      { title: 'Licorice Pizza' },
+      { title: 'Nightmare Alley' },
+      { title: 'The Power of the Dog' },
+      { title: 'West Side Story' },
+    ],
+  },
+  {
+    year: 2021,
+    ceremony: '93rd Academy Awards',
+    nominees: [
+      { title: 'Nomadland' },
+      { title: 'The Father' },
+      { title: 'Judas and the Black Messiah' },
+      { title: 'Mank' },
+      { title: 'Minari' },
+      { title: 'Promising Young Woman' },
+      { title: 'Sound of Metal' },
+      { title: 'The Trial of the Chicago 7' },
+    ],
+  },
+  {
+    year: 2020,
+    ceremony: '92nd Academy Awards',
+    nominees: [
+      { title: 'Parasite' },
+      { title: '1917' },
+      { title: 'Ford v Ferrari' },
+      { title: 'The Irishman' },
+      { title: 'Jojo Rabbit' },
+      { title: 'Joker' },
+      { title: 'Little Women' },
+      { title: 'Marriage Story' },
+      { title: 'Once Upon a Time in Hollywood' },
+    ],
+  },
+  {
+    year: 2019,
+    ceremony: '91st Academy Awards',
+    nominees: [
+      { title: 'Green Book' },
+      { title: 'BlackKklansman' },
+      { title: 'Black Panther' },
+      { title: 'Bohemian Rhapsody' },
+      { title: 'The Favourite' },
+      { title: 'Roma' },
+      { title: 'A Star Is Born' },
+      { title: 'Vice' },
+    ],
+  },
+  {
+    year: 2018,
+    ceremony: '90th Academy Awards',
+    nominees: [
+      { title: 'The Shape of Water' },
+      { title: 'Call Me by Your Name' },
+      { title: 'Darkest Hour' },
+      { title: 'Dunkirk' },
+      { title: 'Get Out' },
+      { title: 'Lady Bird' },
+      { title: 'Phantom Thread' },
+      { title: 'The Post' },
+      { title: 'Three Billboards Outside Ebbing, Missouri' },
+    ],
+  },
+  {
+    year: 2017,
+    ceremony: '89th Academy Awards',
+    nominees: [
+      { title: 'Moonlight' },
+      { title: 'Arrival' },
+      { title: 'Fences' },
+      { title: 'Hacksaw Ridge' },
+      { title: 'Hell or High Water' },
+      { title: 'Hidden Figures' },
+      { title: 'La La Land' },
+      { title: 'Lion' },
+      { title: 'Manchester by the Sea' },
+    ],
+  },
+  {
+    year: 2016,
+    ceremony: '88th Academy Awards',
+    nominees: [
+      { title: 'Spotlight' },
+      { title: 'The Big Short' },
+      { title: 'Bridge of Spies' },
+      { title: 'Brooklyn' },
+      { title: 'Mad Max: Fury Road' },
+      { title: 'The Martian' },
+      { title: 'The Revenant' },
+      { title: 'Room' },
+    ],
+  },
+  {
+    year: 2015,
+    ceremony: '87th Academy Awards',
+    nominees: [
+      { title: 'Birdman' },
+      { title: 'American Sniper' },
+      { title: 'Boyhood' },
+      { title: 'The Grand Budapest Hotel' },
+      { title: 'The Imitation Game' },
+      { title: 'Selma' },
+      { title: 'The Theory of Everything' },
+      { title: 'Whiplash' },
+    ],
+  },
+]
+
+export function getAvailableYears(): number[] {
+  return NOMINEES_BY_YEAR.map((n) => n.year).sort((a, b) => b - a)
+}
+
+export function getNomineesForYear(year: number): YearNominees | undefined {
+  return NOMINEES_BY_YEAR.find((n) => n.year === year)
+}
