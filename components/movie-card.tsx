@@ -103,10 +103,10 @@ export function MovieCard({
                     onMoveUp?.();
                   }}
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gold/20 bg-background/70 text-gold/70 backdrop-blur-sm transition-colors active:bg-gold/20 disabled:opacity-30 disabled:pointer-events-none"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/20 bg-background/70 text-gold/70 backdrop-blur-sm transition-colors active:bg-gold/20 disabled:opacity-30 disabled:pointer-events-none"
                   aria-label="Move up"
                 >
-                  <ChevronUp className="h-4 w-4" />
+                  <ChevronUp className="h-5 w-5" />
                 </button>
                 <button
                   type="button"
@@ -116,10 +116,10 @@ export function MovieCard({
                     onMoveDown?.();
                   }}
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gold/20 bg-background/70 text-gold/70 backdrop-blur-sm transition-colors active:bg-gold/20 disabled:opacity-30 disabled:pointer-events-none"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/20 bg-background/70 text-gold/70 backdrop-blur-sm transition-colors active:bg-gold/20 disabled:opacity-30 disabled:pointer-events-none"
                   aria-label="Move down"
                 >
-                  <ChevronDown className="h-4 w-4" />
+                  <ChevronDown className="h-5 w-5" />
                 </button>
               </div>
             )}

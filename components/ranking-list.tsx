@@ -53,8 +53,8 @@ export function RankingList({ movies, onReorder }: RankingListProps) {
     }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 150,
-        tolerance: 5,
+        delay: 250,
+        tolerance: 8,
       },
     }),
     useSensor(KeyboardSensor, {
@@ -101,7 +101,7 @@ export function RankingList({ movies, onReorder }: RankingListProps) {
         strategy={verticalListSortingStrategy}
       >
         <div
-          className="flex flex-col gap-3 md:gap-4"
+          className="flex flex-col gap-8 md:gap-4"
           role="list"
           aria-label="Movie ranking list"
         >
