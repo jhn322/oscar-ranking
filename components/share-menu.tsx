@@ -70,16 +70,16 @@ export function ShareMenu({ rankingText, disabled }: ShareMenuProps) {
       <button
         onClick={() => setOpen(!open)}
         disabled={disabled}
-        className="flex h-9 items-center gap-1.5 rounded-lg border border-gold/30 bg-gold/10 px-3 text-xs font-medium text-gold transition-colors hover:bg-gold/20 disabled:cursor-not-allowed disabled:opacity-40"
+        className="flex h-10 w-10 bg-gold/10 cursor-pointer sm:w-auto items-center gap-1.5 justify-center sm:justify-start rounded-full border border-gold/50 text-gold px-0 sm:px-3 text-xs font-medium transition-colors hover:bg-gold/20 disabled:cursor-not-allowed disabled:opacity-40"
         aria-label="Share ranking"
         aria-expanded={open}
       >
-        <Share2 className="h-3.5 w-3.5" />
+        <Share2 className="h-4 w-4" />
         <span className="hidden sm:inline">Share</span>
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-2 w-52 overflow-hidden rounded-xl border border-border/60 bg-surface-elevated shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+        <div className="absolute right-0 bottom-full z-50 mb-2 w-52 overflow-hidden rounded-xl border border-border/60 bg-background/80 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
           <div className="flex items-center justify-between border-b border-border/30 px-3 py-2.5">
             <span className="text-xs font-semibold text-foreground">
               Share Ranking
@@ -89,27 +89,27 @@ export function ShareMenu({ rankingText, disabled }: ShareMenuProps) {
               className="flex h-5 w-5 items-center justify-center rounded text-muted-foreground transition-colors hover:text-foreground"
               aria-label="Close share menu"
             >
-              <X className="h-3.5 w-3.5" />
+              <X className="h-3.5 w-3.5 cursor-pointer" />
             </button>
           </div>
           <div className="flex flex-col p-1.5">
             <button
               onClick={handleTwitter}
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-gold/10 hover:text-foreground"
+              className="flex items-center gap-3 rounded-full cursor-pointer px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-gold/10 hover:text-foreground"
             >
               <TwitterIcon className="h-4 w-4" />
               Post on X
             </button>
             <button
               onClick={handleFacebook}
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-gold/10 hover:text-foreground"
+              className="flex items-center gap-3 rounded-full cursor-pointer px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-gold/10 hover:text-foreground"
             >
               <FacebookIcon className="h-4 w-4" />
               Share on Facebook
             </button>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-gold/10 hover:text-foreground"
+              className="flex items-center gap-3 rounded-full cursor-pointer px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-gold/10 hover:text-foreground"
             >
               {copied ? (
                 <>

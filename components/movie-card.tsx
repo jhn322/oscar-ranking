@@ -1,13 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { Star, ExternalLink, ChevronUp, ChevronDown } from "lucide-react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 import type { MovieDetails } from "@/lib/types";
 import { getPosterUrl, getBackdropUrl } from "@/lib/tmdb";
+import Link from "next/link";
 
 interface MovieCardProps {
   movie: MovieDetails;
   rank: number;
+  summary?: string;
   isDragging?: boolean;
   style?: React.CSSProperties;
   dragProps?: Record<string, unknown>;
@@ -21,6 +23,7 @@ interface MovieCardProps {
 export function MovieCard({
   movie,
   rank,
+  summary,
   isDragging,
   style,
   dragProps,
@@ -41,16 +44,12 @@ export function MovieCard({
       ref={setNodeRef}
       style={{ ...style, touchAction: "none" }}
       {...dragProps}
-      className={`
-        group relative w-full select-none
-        transition-shadow duration-300
-        ${isDragging ? "z-50 cursor-grabbing shadow-[0_20px_60px_rgba(212,168,67,0.25)]" : "cursor-grab shadow-[0_4px_20px_rgba(0,0,0,0.4)]"}
-      `}
+      className="group relative w-full select-none transition-shadow duration-300 cursor-grab"
     >
       {/* Mobile */}
       <div className="block md:hidden">
         <div
-          className={`relative overflow-hidden rounded-xl border bg-card transition-colors ${isDragging ? "border-gold/40" : "border-border/50"}`}
+          className={`relative overflow-hidden rounded-3xl border bg-card transition-colors ${isDragging ? "z-50 cursor-grabbing border-2 border-gold/50" : "border-border/50"}`}
         >
           {/* Bg image */}
           <div className="relative h-44">
@@ -88,21 +87,10 @@ export function MovieCard({
               </span>
             </div>
 
-            {/* IMDB */}
-            {imdbUrl && (
-              <a
-                href={imdbUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                onPointerDown={(e) => e.stopPropagation()}
-                className="absolute right-3 top-3 flex h-8 items-center gap-1 rounded-lg border border-gold/30 bg-background/70 px-2.5 text-[11px] font-bold text-gold backdrop-blur-sm transition-colors active:bg-gold/20"
-                aria-label={`View ${movie.title} on IMDB`}
-              >
-                IMDb
-                <ExternalLink className="h-3 w-3" />
-              </a>
-            )}
+            <div
+              className="absolute right-3 top-3 h-8 w-8"
+              aria-hidden="true"
+            />
 
             {/* Move up/down btns */}
             {(onMoveUp || onMoveDown) && (
@@ -115,7 +103,7 @@ export function MovieCard({
                     onMoveUp?.();
                   }}
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="flex h-7 w-7 items-center justify-center rounded-lg border border-gold/20 bg-background/70 text-gold/70 backdrop-blur-sm transition-colors active:bg-gold/20 disabled:opacity-30 disabled:pointer-events-none"
+                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gold/20 bg-background/70 text-gold/70 backdrop-blur-sm transition-colors active:bg-gold/20 disabled:opacity-30 disabled:pointer-events-none"
                   aria-label="Move up"
                 >
                   <ChevronUp className="h-4 w-4" />
@@ -128,7 +116,7 @@ export function MovieCard({
                     onMoveDown?.();
                   }}
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="flex h-7 w-7 items-center justify-center rounded-lg border border-gold/20 bg-background/70 text-gold/70 backdrop-blur-sm transition-colors active:bg-gold/20 disabled:opacity-30 disabled:pointer-events-none"
+                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gold/20 bg-background/70 text-gold/70 backdrop-blur-sm transition-colors active:bg-gold/20 disabled:opacity-30 disabled:pointer-events-none"
                   aria-label="Move down"
                 >
                   <ChevronDown className="h-4 w-4" />
@@ -144,11 +132,23 @@ export function MovieCard({
                 <span className="text-xs font-medium text-gold">
                   {movie.year}
                 </span>
-                {movie.rating > 0 && (
-                  <span className="flex items-center gap-0.5 text-xs text-gold/70">
-                    <Star className="h-3 w-3 fill-gold/70" />
-                    {movie.rating.toFixed(1)}
-                  </span>
+                {imdbUrl && (
+                  <Link
+                    href={imdbUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    onPointerDown={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 rounded-full border border-gold/20 bg-gold/5 px-2 py-0.5 text-[12px] font-bold text-gold transition-colors hover:bg-gold/15"
+                    aria-label={`View ${movie.title} on IMDB`}
+                  >
+                    IMDb
+                    {movie.rating > 0 && (
+                      <span className="ml-1 text-gold/70 text-[12px]">
+                        {movie.rating.toFixed(1)}
+                      </span>
+                    )}
+                  </Link>
                 )}
               </div>
             </div>
@@ -165,6 +165,10 @@ export function MovieCard({
                 </span>
               ))}
             </div>
+            {/* summary text */}
+            <p className="my-2 text-xs text-muted-foreground line-clamp-3">
+              {summary ?? movie.overview}
+            </p>
             <div className="mt-2.5 flex flex-col gap-1">
               <p className="text-xs text-muted-foreground">
                 <span className="font-medium text-gold/60">Dir.</span>{" "}
@@ -186,7 +190,7 @@ export function MovieCard({
       {/* Desktop */}
       <div className="hidden md:block">
         <div
-          className={`relative overflow-hidden rounded-xl border bg-card transition-all duration-300 ${isDragging ? "border-gold/40" : "border-border/50 hover:border-gold/20"}`}
+          className={`relative overflow-hidden rounded-3xl bg-background/80 transition-all duration-300 ${isDragging ? "z-50 cursor-grabbing border-2 border-gold/50" : "shadow-[0_4px_20px_rgba(0,0,0,0.4)]"}`}
         >
           <div className="flex gap-5 p-4">
             {/* Move up/down btns - Desktop */}
@@ -200,7 +204,7 @@ export function MovieCard({
                     onMoveUp?.();
                   }}
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-gold/20 bg-gold/5 text-gold/70 transition-colors hover:bg-gold/15 hover:text-gold disabled:opacity-25 disabled:pointer-events-none"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/20 bg-gold/5 text-gold/70 transition-colors hover:bg-gold/15 hover:text-gold disabled:opacity-25 disabled:pointer-events-none"
                   aria-label="Move up"
                 >
                   <ChevronUp className="h-4 w-4" />
@@ -213,7 +217,7 @@ export function MovieCard({
                     onMoveDown?.();
                   }}
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-gold/20 bg-gold/5 text-gold/70 transition-colors hover:bg-gold/15 hover:text-gold disabled:opacity-25 disabled:pointer-events-none"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/20 bg-gold/5 text-gold/70 transition-colors hover:bg-gold/15 hover:text-gold disabled:opacity-25 disabled:pointer-events-none"
                   aria-label="Move down"
                 >
                   <ChevronDown className="h-4 w-4" />
@@ -221,7 +225,7 @@ export function MovieCard({
               </div>
             )}
             {/* Poster */}
-            <div className="relative h-56 w-[150px] shrink-0 overflow-hidden rounded-lg">
+            <div className="relative h-56 w-37.5 shrink-0 overflow-hidden rounded-xl">
               {posterUrl ? (
                 <Image
                   src={posterUrl}
@@ -257,11 +261,23 @@ export function MovieCard({
                   <span className="text-sm font-medium text-gold">
                     {movie.year}
                   </span>
-                  {movie.rating > 0 && (
-                    <span className="flex items-center gap-1 text-sm text-gold/70">
-                      <Star className="h-3.5 w-3.5 fill-gold/70" />
-                      {movie.rating.toFixed(1)}
-                    </span>
+                  {imdbUrl && (
+                    <Link
+                      href={imdbUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      onPointerDown={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 rounded-full border border-gold/20 bg-gold/5 px-2 py-0.5 text-[12px] font-bold text-gold transition-colors hover:bg-gold/15"
+                      aria-label={`View ${movie.title} on IMDB`}
+                    >
+                      IMDb
+                      {movie.rating > 0 && (
+                        <span className="ml-1 text-gold/70 text-[12px]">
+                          {movie.rating.toFixed(1)}
+                        </span>
+                      )}
+                    </Link>
                   )}
                 </div>
                 <div className="mt-3 flex flex-wrap gap-1.5">
@@ -274,6 +290,10 @@ export function MovieCard({
                     </span>
                   ))}
                 </div>
+                {/* summary text */}
+                <p className="my-2 text-sm text-muted-foreground line-clamp-3">
+                  {summary ?? movie.overview}
+                </p>
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-sm text-muted-foreground">
@@ -287,21 +307,6 @@ export function MovieCard({
                       {movie.cast.join(", ")}
                     </span>
                   </p>
-                )}
-                {/* IMDB - Desktop */}
-                {imdbUrl && (
-                  <a
-                    href={imdbUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    onPointerDown={(e) => e.stopPropagation()}
-                    className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-lg border border-gold/20 bg-gold/5 px-3 py-1.5 text-xs font-bold text-gold transition-colors hover:bg-gold/15"
-                    aria-label={`View ${movie.title} on IMDB`}
-                  >
-                    IMDb
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
                 )}
               </div>
             </div>

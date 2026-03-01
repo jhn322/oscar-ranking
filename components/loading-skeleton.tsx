@@ -18,8 +18,8 @@ export function MovieCardSkeleton() {
         <div className="overflow-hidden rounded-xl border border-border/30 bg-card">
           <div className="relative h-44 bg-surface-elevated">
             <div className="absolute right-3 bottom-3 flex items-center gap-1">
-              <div className="h-7 w-7 rounded-lg bg-background/30" />
-              <div className="h-7 w-7 rounded-lg bg-background/30" />
+              <div className="h-7 w-7 rounded-3xl bg-background/30" />
+              <div className="h-7 w-7 rounded-3xl bg-background/30" />
             </div>
           </div>
           <div className="px-4 pb-4 pt-3">
@@ -33,13 +33,13 @@ export function MovieCardSkeleton() {
         </div>
       </div>
       <div className="hidden md:block">
-        <div className="overflow-hidden rounded-xl border border-border/30 bg-card">
+        <div className="overflow-hidden rounded-3xl border border-border/30 bg-card">
           <div className="flex gap-5 p-4">
             <div className="flex flex-col items-center justify-center gap-1.5">
-              <div className="h-8 w-8 rounded-lg bg-surface-elevated" />
-              <div className="h-8 w-8 rounded-lg bg-surface-elevated" />
+              <div className="h-8 w-8 rounded-3xl bg-surface-elevated" />
+              <div className="h-8 w-8 rounded-3xl bg-surface-elevated" />
             </div>
-            <div className="h-56 w-[150px] shrink-0 rounded-lg bg-surface-elevated" />
+            <div className="h-56 w-37.5 shrink-0 rounded-3xl bg-surface-elevated" />
             <div className="flex flex-1 flex-col justify-between py-1">
               <div>
                 <div className="h-6 w-2/3 rounded bg-surface-elevated" />

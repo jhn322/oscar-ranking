@@ -106,7 +106,7 @@ export function OscarRanking() {
   }, []);
 
   return (
-    <main className="min-h-dvh bg-background">
+    <main className="min-h-dvh bg-card">
       <header className="sticky top-0 z-40 border-b border-border/30 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto max-w-2xl px-4 py-4">
           <div className="flex items-center justify-between">
@@ -118,22 +118,7 @@ export function OscarRanking() {
                 {data?.ceremony || `${selectedYear} Ceremony`}
               </p>
             </div>
-            <div className="flex items-center gap-2">
-              {hasReordered && (
-                <button
-                  onClick={handleReset}
-                  className="flex h-9 items-center gap-1.5 rounded-lg border border-border/50 bg-surface px-3 text-xs font-medium text-muted-foreground transition-colors hover:border-gold/20 hover:text-foreground"
-                  aria-label="Reset ranking"
-                >
-                  <RotateCcw className="h-3.5 w-3.5" />
-                  <span className="hidden sm:inline">Reset</span>
-                </button>
-              )}
-              <ShareMenu
-                rankingText={rankingText}
-                disabled={rankedMovies.length === 0}
-              />
-            </div>
+            <div className="flex items-center gap-2" aria-hidden="true" />
           </div>
 
           {/* Year */}
@@ -149,6 +134,23 @@ export function OscarRanking() {
       </header>
 
       <section className="mx-auto max-w-2xl px-4 py-5">
+        {/* fixed action btns */}
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2">
+          {hasReordered && (
+            <button
+              onClick={handleReset}
+              className="flex h-10 items-center cursor-pointer gap-1.5 rounded-full border border-border/50 bg-background/80 px-3 text-xs font-medium text-muted-foreground transition-colors hover:border-gold/20 hover:text-foreground"
+              aria-label="Reset ranking"
+            >
+              <RotateCcw className="h-4 w-4" />
+              <span className="hidden sm:inline">Reset</span>
+            </button>
+          )}
+          <ShareMenu
+            rankingText={rankingText}
+            disabled={rankedMovies.length === 0}
+          />
+        </div>
         {!isLoading && rankedMovies.length > 0 && (
           <p className="mb-4 text-center text-xs tracking-wide text-muted-foreground md:text-sm">
             Drag to reorder your personal ranking

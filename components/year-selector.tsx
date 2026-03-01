@@ -50,8 +50,8 @@ export function YearSelector({
       "flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200",
       "border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50",
       active
-        ? "border-gold/50 bg-gold/10 text-gold shadow-[0_0_12px_rgba(212,168,67,0.15)]"
-        : "border-border/50 bg-surface text-muted-foreground hover:border-gold/20 hover:text-foreground",
+        ? "border-gold/50 bg-gold/10 text-gold"
+        : "border-border/50 bg-background/80 text-muted-foreground hover:border-gold/20 hover:text-foreground",
       loading && "cursor-not-allowed opacity-50",
     );
 
@@ -60,8 +60,8 @@ export function YearSelector({
       "flex flex-shrink-0 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200",
       "border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50",
       active
-        ? "border-gold/50 bg-gold/10 text-gold shadow-[0_0_12px_rgba(212,168,67,0.15)]"
-        : "border-border/50 bg-surface text-muted-foreground hover:border-gold/20 hover:text-foreground",
+        ? "border-gold/50 bg-gold/10 text-gold"
+        : "border-border/50 bg-background/80 text-muted-foreground hover:border-gold/20 hover:text-foreground",
       loading && "cursor-not-allowed opacity-50",
     );
 
@@ -99,7 +99,10 @@ export function YearSelector({
           aria-selected={selectedYear === year}
           disabled={loading}
           onClick={() => onSelectYear(year)}
-          className={cn(pillClass(selectedYear === year), "hidden md:flex")}
+          className={cn(
+            pillClass(selectedYear === year),
+            "hidden md:flex cursor-pointer",
+          )}
         >
           {year}
         </button>
@@ -111,7 +114,10 @@ export function YearSelector({
           <button
             disabled={loading}
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className={cn(moreBtnClass(isInMobileMore), "md:hidden")}
+            className={cn(
+              moreBtnClass(isInMobileMore),
+              "md:hidden cursor-pointer",
+            )}
             aria-expanded={dropdownOpen}
             aria-haspopup="listbox"
           >
@@ -130,7 +136,10 @@ export function YearSelector({
           <button
             disabled={loading}
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className={cn(moreBtnClass(isInDesktopMore), "hidden md:flex")}
+            className={cn(
+              moreBtnClass(isInDesktopMore),
+              "hidden md:flex cursor-pointer",
+            )}
             aria-expanded={dropdownOpen}
             aria-haspopup="listbox"
           >
@@ -145,7 +154,7 @@ export function YearSelector({
         )}
 
         {dropdownOpen && (
-          <div className="absolute right-0 top-full z-50 mt-2 w-28 overflow-hidden rounded-xl border border-border/60 bg-surface-elevated shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+          <div className="absolute right-0 top-full z-50 mt-2 w-22 bg-background overflow-hidden rounded-3xl border border-border/60  shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
             <div className="flex flex-col p-1">
               {/* Mobile dropdown items */}
               {mobileMore.map((year) => (
@@ -159,7 +168,7 @@ export function YearSelector({
                   }}
                   className={cn(
                     dropdownItemClass(selectedYear === year),
-                    "md:hidden",
+                    "md:hidden cursor-pointer",
                   )}
                 >
                   {year}
@@ -177,7 +186,7 @@ export function YearSelector({
                   }}
                   className={cn(
                     dropdownItemClass(selectedYear === year),
-                    "hidden md:block",
+                    "hidden md:block cursor-pointer",
                   )}
                 >
                   {year}
