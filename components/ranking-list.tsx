@@ -46,15 +46,15 @@ export function RankingList({ movies, onReorder }: RankingListProps) {
   );
 
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 5,
-      },
-    }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 250,
-        tolerance: 8,
+        delay: 300,
+        tolerance: 10,
+      },
+    }),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
       },
     }),
     useSensor(KeyboardSensor, {
