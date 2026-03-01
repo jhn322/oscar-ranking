@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import useSWR from "swr";
 import { RotateCcw, Film } from "lucide-react";
 import { RankingList } from "@/components/ranking-list";
@@ -56,6 +56,9 @@ export function OscarRanking() {
   const [selectedYear, setSelectedYear] = useState(2026);
   const [rankedMovies, setRankedMovies] = useState<MovieDetails[]>([]);
   const [hasReordered, setHasReordered] = useState(false);
+  const rankingRef = useRef<HTMLDivElement>(
+    null,
+  ) as React.RefObject<HTMLDivElement>;
 
   const availableYears = [
     2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015,
@@ -149,6 +152,8 @@ export function OscarRanking() {
           <ShareMenu
             rankingText={rankingText}
             disabled={rankedMovies.length === 0}
+            rankingRef={rankingRef}
+            year={selectedYear}
           />
         </div>
         {!isLoading && rankedMovies.length > 0 && (
@@ -176,7 +181,9 @@ export function OscarRanking() {
         )}
 
         {!isLoading && !error && rankedMovies.length > 0 && (
-          <RankingList movies={rankedMovies} onReorder={handleReorder} />
+          <div ref={rankingRef} className="bg-card rounded-3xl">
+            <RankingList movies={rankedMovies} onReorder={handleReorder} />
+          </div>
         )}
 
         {!isLoading && !error && rankedMovies.length === 0 && data && (

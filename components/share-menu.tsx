@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Share2, X, Copy, Check } from "lucide-react";
+import { Share2, X, Copy, Check, Download } from "lucide-react";
+import { toPng } from "html-to-image";
 
 interface ShareMenuProps {
   rankingText: string;
   disabled?: boolean;
+  rankingRef?: React.RefObject<HTMLDivElement>;
+  year?: number;
 }
 
 function TwitterIcon({ className }: { className?: string }) {
@@ -24,9 +27,15 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-export function ShareMenu({ rankingText, disabled }: ShareMenuProps) {
+export function ShareMenu({
+  rankingText,
+  disabled,
+  rankingRef,
+  year,
+}: ShareMenuProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isCapturing, setIsCapturing] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -65,6 +74,32 @@ export function ShareMenu({ rankingText, disabled }: ShareMenuProps) {
     setOpen(false);
   };
 
+  const handleScreenshot = async () => {
+    if (!rankingRef?.current) return;
+
+    try {
+      setIsCapturing(true);
+
+      const dataUrl = await toPng(rankingRef.current, {
+        cacheBust: true,
+        pixelRatio: 2,
+      });
+
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `oscars-ranking-${year || new Date().getFullYear()}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setOpen(false);
+    } catch (error) {
+      console.error("Failed to capture screenshot:", error);
+    } finally {
+      setIsCapturing(false);
+    }
+  };
+
   return (
     <div className="relative" ref={menuRef}>
       <button
@@ -79,7 +114,7 @@ export function ShareMenu({ rankingText, disabled }: ShareMenuProps) {
       </button>
 
       {open && (
-        <div className="absolute right-0 bottom-full z-50 mb-2 w-52 overflow-hidden rounded-xl border border-border/60 bg-background/80 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+        <div className="absolute right-0 bottom-full z-50 mb-2 w-52 overflow-hidden rounded-xl border border-border/60 bg-background shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
           <div className="flex items-center justify-between border-b border-border/30 px-3 py-2.5">
             <span className="text-xs font-semibold text-foreground">
               Share Ranking
@@ -123,6 +158,16 @@ export function ShareMenu({ rankingText, disabled }: ShareMenuProps) {
                 </>
               )}
             </button>
+            {rankingRef && (
+              <button
+                onClick={handleScreenshot}
+                disabled={isCapturing}
+                className="flex items-center gap-3 rounded-full cursor-pointer px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-gold/10 hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Download className="h-4 w-4" />
+                {isCapturing ? "Saving..." : "Save as Image"}
+              </button>
+            )}
           </div>
         </div>
       )}
