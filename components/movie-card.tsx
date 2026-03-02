@@ -94,7 +94,7 @@ export function MovieCard({
 
             {/* Move up/down btns */}
             {(onMoveUp || onMoveDown) && (
-              <div className="absolute right-3 z-99 bottom-3 flex items-center gap-1">
+              <div className="absolute right-3 z-30 bottom-3 flex items-center gap-1">
                 <button
                   type="button"
                   disabled={isFirst}
