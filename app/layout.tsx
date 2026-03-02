@@ -17,19 +17,18 @@ export const metadata: Metadata = {
   title: "Oscar Ranking - Rank Your Favorite Best Picture Nominees",
   description:
     "Rank your favorite Best Picture nominees from the Academy Awards. Drag and drop to create your personal ranking.",
-  generator: "v0.app",
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
+        url: "/favicon.ico",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/icon-dark-32x32.png",
+        url: "/favicon.ico",
         media: "(prefers-color-scheme: dark)",
       },
       {
-        url: "/icon.svg",
+        url: "/favicon.svg",
         type: "image/svg+xml",
       },
     ],
